@@ -1,16 +1,28 @@
-function displayCurrentDay() {
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const now = new Date();
-    const currentDay = daysOfWeek[now.getUTCDay()];
-    document.querySelector('[data-testid="currentDayOfTheWeek"]').textContent = "Current Day of the Week: " + currentDay;
-}
+const desiredTime = new Date();
+desiredTime.setUTCHours(8);
+desiredTime.setUTCMinutes(15);
+desiredTime.setUTCSeconds(0);
 
-function displayUTCTime() {
-    const now = new Date();
-    const utcTime = now.toISOString().split('T')[1].split('.')[0]; // Extract only the time part
-    document.querySelector('[data-testid="currentUTCTime"]').textContent = "Current UTC Time: " + utcTime;
-}
+const timestamp = desiredTime.getTime();
 
-// Trigger the function on page load
-displayCurrentDay();
-displayUTCTime();
+const timeElement = document.getElementById("time");
+timeElement.innerHTML = timestamp.toString();
+
+console.log(timestamp);
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the current date and time
+    const currentDate = new Date();
+  
+    // Update the day of the week
+    const dayOfWeekElement = document.getElementById("dayOfWeek");
+    const options = { weekday: "long" };
+    const dayOfWeek = currentDate.toLocaleDateString("en-US", options);
+    dayOfWeekElement.textContent = dayOfWeek;
+  
+    // Update the UTC time
+    const timeElement = document.getElementById("time");
+    const timestamp = currentDate.getTime();
+    timeElement.textContent = timestamp.toString();
+  });
+  
